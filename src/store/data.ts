@@ -69,6 +69,40 @@ export const defaultPersonList = <IPersonConfig[]>
     "prizeTime": [],
     "prizeId": [],
     "country": "中国"
+  },
+  {
+    "uid": "U100156005",
+    "name": "李明1",
+    "department": "设计部",
+    "identity": "UI/UX设计师",
+    "avatar": "https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+    "x": 4,
+    "y": 1,
+    "id": 4,
+    "isWin": false,
+    "createTime": "Tue Jan 09 2024 23:20:07 GMT+0800 (China Standard Time)",
+    "updateTime": "Tue Jan 09 2024 23:20:07 GMT+0800 (China Standard Time)",
+    "prizeName": [],
+    "prizeTime": [],
+    "prizeId": [],
+    "country": "中国"
+  },
+  {
+    "uid": "U100156007",
+    "name": "李明2",
+    "department": "设计部",
+    "identity": "UI/UX设计师",
+    "avatar": "https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+    "x": 4,
+    "y": 1,
+    "id": 5,
+    "isWin": false,
+    "createTime": "Tue Jan 09 2024 23:20:07 GMT+0800 (China Standard Time)",
+    "updateTime": "Tue Jan 09 2024 23:20:07 GMT+0800 (China Standard Time)",
+    "prizeName": [],
+    "prizeTime": [],
+    "prizeId": [],
+    "country": "中国"
   }]
              
 export const defaultMusicList = [
@@ -141,7 +175,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: '2',
       name: '三等奖',
-      url: 'https://1kw20.fun/resource/image/image3.png',
+      url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     },
     separateCount: {
       enable: true,
@@ -162,7 +196,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: '1',
       name: '二等奖',
-      url: 'https://1kw20.fun/resource/image/image2.png',
+      url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     },
     separateCount: {
       enable: false,
@@ -183,7 +217,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: '0',
       name: '一等奖',
-      url: 'https://1kw20.fun/resource/image/image1.png',
+      url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     },
     separateCount: {
       enable: false,
@@ -205,7 +239,7 @@ export const defaultCurrentPrize = <IPrizeConfig>{
   picture: {
     id: '2',
     name: '三等奖',
-    url: 'https://1kw20.fun/resource/image/image3.png',
+    url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
   },
   separateCount: {
     enable: true,
@@ -242,17 +276,17 @@ export const defaultImageList = [
   {
     id: '0',
     name: '一等奖',
-    url: 'https://1kw20.fun/resource/image/image1.png',
+    url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
   },
   {
     id: '1',
     name: '二等奖',
-    url: 'https://1kw20.fun/resource/image/image2.png',
+    url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
   },
   {
     id: '2',
     name: '三等奖',
-    url: 'https://1kw20.fun/resource/image/image3.png',
+    url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
   },
 ]
 export const defaultPatternList = [21, 38, 55, 54, 53, 70, 87, 88, 89, 23, 40, 57, 74, 91, 92, 93, 76, 59, 42, 25, 24, 27, 28, 29, 46, 63, 62, 61, 78, 95, 96, 97, 20, 19, 31, 48, 65, 66, 67, 84, 101, 100, 99, 32, 33]
