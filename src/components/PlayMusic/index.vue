@@ -71,10 +71,10 @@ function onPlayEnd() {
 }
 
 function enterConfig() {
-  router.push('/log-lottery/config')
+  router.push('/lottery/config')
 }
 function enterHome() {
-  router.push('/log-lottery')
+  router.push('/lottery')
 }
 
 onMounted(() => {

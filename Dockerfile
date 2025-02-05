@@ -21,15 +21,15 @@ FROM nginx:1.26
 
 # 修改nginx配置
 # 向 #error_page 前添加内容
-# location /log-lottery {
-#           alias /usr/share/nginx/log-lottery;
+# location /lottery {
+#           alias /usr/share/nginx/lottery;
 #           index index.html index.htm;
-#           try_files $uri $uri/ /log-lottery/index.html;
+#           try_files $uri $uri/ /lottery/index.html;
 #         }
-RUN sed -i 's/#error_page/location \/log-lottery {\n          alias \/usr\/share\/nginx\/log-lottery;\n          index index.html index.htm;\n          try_files $uri $uri\/ \/log-lottery\/index.html;\n        }\n#error_page/' /etc/nginx/conf.d/default.conf
+RUN sed -i 's/#error_page/location \/lottery {\n          alias \/usr\/share\/nginx\/lottery;\n          index index.html index.htm;\n          try_files $uri $uri\/ \/lottery\/index.html;\n        }\n#error_page/' /etc/nginx/conf.d/default.conf
 
 # 将 Vite 项目的 dist 目录复制到 Nginx 的默认静态文件目录
-COPY --from=0 /usr/src/app/dist /usr/share/nginx/log-lottery
+COPY --from=0 /usr/src/app/dist /usr/share/nginx/lottery
 
 # 暴露容器的 80 端口
 EXPOSE 80

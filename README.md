@@ -58,16 +58,16 @@ npm run build:file
 构建镜像
 
 ```bash
-docker build -t log-lottery .
+docker build -t lottery .
 ```
 
 运行容器
 
 ```bash
-docker run -d -p 9279:80 log-lottery
+docker run -d -p 9279:80 lottery
 ```
 
-容器运行成功后即可在本地通过<http://localhost:9279/log-lottery/>访问
+容器运行成功后即可在本地通过<http://localhost:9279/lottery/>访问
 
 ## License
 
