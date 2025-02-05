@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import type { IPrizeConfig } from '../../types/storeType'
-import defaultPrizeImage from '@/assets/images/龙.png'
+import defaultPrizeImage from '@/assets/images/default.jpg'
 import ImageSync from '@/components/ImageSync/index.vue'
 
 import EditSeparateDialog from '@/components/NumberSeparate/EditSeparateDialog.vue'

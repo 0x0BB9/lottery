@@ -143,7 +143,7 @@ export default {
     delete: '删除',
     removePerson: '移入未中奖名单',
     defaultTitle: '百弓网络科技有限公司抽奖',
-    xlsxName: '抽奖表-zhCn.xlsx',
+    xlsxName: '人口登记表-zhCn.xlsx',
     readmeName: 'readme-zhCn.md',
   },
   footer: {
