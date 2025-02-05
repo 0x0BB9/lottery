@@ -52,7 +52,7 @@ onMounted(() => {
   themeChange(localTheme.value.name)
   setCurrentPrize()
   if (judgeMobile() || !judgeChromeOrEdge()) {
-    tipDialog.value.showModal()
+    // tipDialog.value.showModal()
   }
 })
 </script>
