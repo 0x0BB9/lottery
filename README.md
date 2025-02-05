@@ -1,4 +1,4 @@
-# log-lottery
+# lottery
 > 基于vue3的抽奖系统
 
 ## 技术

@@ -9,6 +9,7 @@ export interface IPersonConfig {
     x: number;
     y: number
     createTime: string;
+    country: string;
     updateTime: string;
     prizeName: string[];
     prizeId: string[];
