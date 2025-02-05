@@ -9,7 +9,7 @@ export const useGlobalConfig = defineStore('global', {
       globalConfig: {
         rowCount: 17,
         isSHowPrizeList: true,
-        isShowAvatar: true,
+        isShowAvatar: false,
         topTitle: i18n.global.t('data.defaultTitle'),
         language: browserLanguage,
         theme: {
