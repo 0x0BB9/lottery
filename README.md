@@ -12,12 +12,12 @@
 ## 发布 Github Page 顺序
 
 ### 提交代码
+npm run build
 git add .
 git commit -m "Your commit message"
 git push origin master
 
 ### 发布
-npm run build
 npm run deploy
 
 ## 开发
