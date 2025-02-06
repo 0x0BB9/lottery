@@ -34,9 +34,7 @@ export function useElementStyle(element: any, person: IPersonConfig, index: numb
     })
   }
   element.children[0].style.fontSize = `${textSize * 0.5}px`
-  if (person.id) {
-    element.children[0].textContent = `${person.id}`
-  }
+  element.children[0].textContent = `${person.id || '0'}`
 
   element.children[1].style.fontSize = `${textSize}px`
   element.children[1].style.lineHeight = `${textSize * 3}px`
