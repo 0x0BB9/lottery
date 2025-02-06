@@ -72,7 +72,8 @@ function deleteTemporaryPrize() {
 function submitTemporaryPrize() {
   if (!temporaryPrize.value.name || !temporaryPrize.value.count) {
     // eslint-disable-next-line no-alert
-    alert(i18n.global.t('error.completeInformation'))
+    console.log(t('error.completeInformation'))
+    // alert(i18n.global.t('error.completeInformation'))
     return
   }
   temporaryPrize.value.isShow = true

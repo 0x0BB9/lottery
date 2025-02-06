@@ -13,6 +13,7 @@ import * as XLSX from 'xlsx'
 
 const { t } = useI18n()
 const personConfig = useStore().personConfig
+const prizeConfig = useStore().prizeConfig
 const { getAllPersonList: allPersonList, getAlreadyPersonList: alreadyPersonList } = storeToRefs(personConfig)
 const limitType = '.xlsx,.xls'
 // const personList = ref<any[]>([])
@@ -72,6 +73,7 @@ function exportData() {
 
 function resetData() {
   personConfig.resetAlreadyPerson()
+  prizeConfig.resetDefault()
 }
 
 function deleteAll() {
