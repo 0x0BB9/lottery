@@ -54,62 +54,62 @@ export const configRoutes = {
         // }
       ],
     },
-    {
-      path: '/lottery/config/prize',
-      name: 'PrizeConfig',
-      component: () => import('@/views/Config/Prize/PrizeConfig.vue'),
-      meta: {
-        title: i18n.global.t('sidebar.prizeConfiguration'),
-        icon: 'prize',
-      },
-    },
-    {
-      path: '/lottery/config/global',
-      name: 'GlobalConfig',
-      redirect: '/lottery/config/global/all',
-      meta: {
-        title: i18n.global.t('sidebar.globalSetting'),
-        icon: 'global',
-      },
-      children: [
-        {
-          path: '/lottery/config/global/face',
-          name: 'FaceConfig',
-          component: () => import('@/views/Config/Global/FaceConfig.vue'),
-          meta: {
-            title: i18n.global.t('sidebar.viewSetting'),
-            icon: 'face',
-          },
-        },
-        {
-          path: '/lottery/config/global/image',
-          name: 'ImageConfig',
-          component: () => import('@/views/Config/Global/ImageConfig.vue'),
-          meta: {
-            title: i18n.global.t('sidebar.imagesManagement'),
-            icon: 'image',
-          },
-        },
-        {
-          path: '/lottery/config/global/music',
-          name: 'MusicConfig',
-          component: () => import('@/views/Config/Global/MusicConfig.vue'),
-          meta: {
-            title: i18n.global.t('sidebar.musicManagement'),
-            icon: 'music',
-          },
-        },
-      ],
-    },
-    {
-      path: '/lottery/config/readme',
-      name: 'Readme',
-      component: () => import('@/views/Config/Readme/index.vue'),
-      meta: {
-        title: i18n.global.t('sidebar.operatingInstructions'),
-        icon: 'readme',
-      },
-    },
+    // {
+    //   path: '/lottery/config/prize',
+    //   name: 'PrizeConfig',
+    //   component: () => import('@/views/Config/Prize/PrizeConfig.vue'),
+    //   meta: {
+    //     title: i18n.global.t('sidebar.prizeConfiguration'),
+    //     icon: 'prize',
+    //   },
+    // },
+    // {
+    //   path: '/lottery/config/global',
+    //   name: 'GlobalConfig',
+    //   redirect: '/lottery/config/global/all',
+    //   meta: {
+    //     title: i18n.global.t('sidebar.globalSetting'),
+    //     icon: 'global',
+    //   },
+    //   children: [
+    //     {
+    //       path: '/lottery/config/global/face',
+    //       name: 'FaceConfig',
+    //       component: () => import('@/views/Config/Global/FaceConfig.vue'),
+    //       meta: {
+    //         title: i18n.global.t('sidebar.viewSetting'),
+    //         icon: 'face',
+    //       },
+    //     },
+    //     {
+    //       path: '/lottery/config/global/image',
+    //       name: 'ImageConfig',
+    //       component: () => import('@/views/Config/Global/ImageConfig.vue'),
+    //       meta: {
+    //         title: i18n.global.t('sidebar.imagesManagement'),
+    //         icon: 'image',
+    //       },
+    //     },
+    //     {
+    //       path: '/lottery/config/global/music',
+    //       name: 'MusicConfig',
+    //       component: () => import('@/views/Config/Global/MusicConfig.vue'),
+    //       meta: {
+    //         title: i18n.global.t('sidebar.musicManagement'),
+    //         icon: 'music',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   path: '/lottery/config/readme',
+    //   name: 'Readme',
+    //   component: () => import('@/views/Config/Readme/index.vue'),
+    //   meta: {
+    //     title: i18n.global.t('sidebar.operatingInstructions'),
+    //     icon: 'readme',
+    //   },
+    // },
   ],
 }
 const routes = [
