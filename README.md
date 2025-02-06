@@ -9,6 +9,17 @@
 - pinia
 - daisyui
 
+## 发布 Github Page 顺序
+
+### 提交代码
+git add .
+git commit -m "Your commit message"
+git push origin master
+
+### 发布
+npm run build
+npm run deploy
+
 ## 开发
 
 安装依赖

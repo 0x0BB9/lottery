@@ -142,7 +142,7 @@ export default {
     operation: 'Operation',
     delete: 'Delete',
     removePerson: 'Remove the Person',
-    defaultTitle: '百弓网络科技有限公司抽奖',
+    defaultTitle: '丞百科技',
     xlsxName: 'personListTemplate-en.xlsx',
     readmeName: 'readme-en.md',
   },

@@ -1,6 +1,12 @@
 <script setup lang='ts'>
 import type { IPrizeConfig } from '../../types/storeType'
 import defaultPrizeImage from '@/assets/images/default.jpg'
+import level1 from '@/assets/images/01.png'
+import level2 from '@/assets/images/02.png'
+import level3 from '@/assets/images/03.png'
+import level4 from '@/assets/images/05.png'
+import level5 from '@/assets/images/07.png'
+import level6 from '@/assets/images/08.png'
 import ImageSync from '@/components/ImageSync/index.vue'
 
 import EditSeparateDialog from '@/components/NumberSeparate/EditSeparateDialog.vue'
@@ -24,6 +30,26 @@ const prizeListContainerRef = ref()
 
 const temporaryPrizeRef = ref()
 const selectedPrize = ref<IPrizeConfig | null>()
+
+const getImageSrc = (sort: number) => {
+  switch (sort.toString().padStart(2, '0')) {
+    case '01':
+      return level1
+    case '02':
+      return level2
+    case '03':
+      return level3
+    case '04':
+      return level4
+    case '05':
+      return level5
+    case '06':
+      return level6
+    default:
+      return level1
+  }
+}
+
 // 获取prizeListRef高度
 function getPrizeListHeight() {
   let height = 200
@@ -255,9 +281,9 @@ onMounted(() => {
                   class="absolute z-50 w-full h-full bg-gray-800/70 item-mask rounded-xl"
                 />
                 <figure class="w-10 h-10 rounded-xl">
-                  <ImageSync v-if="item.picture.url" :img-item="item.picture" />
+                  <!-- <ImageSync v-if="!item.picture.url" :img-item="item.picture" /> -->
                   <img
-                    v-else :src="defaultPrizeImage" alt="Prize"
+                    :src="getImageSrc(item.sort)" alt="Prize"
                     class="object-cover h-full rounded-xl"
                   >
                 </figure>
