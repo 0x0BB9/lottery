@@ -1,7 +1,7 @@
 import type { IPersonConfig } from '@/types/storeType'
 import { rgba } from '@/utils/color'
 
-export function useElementStyle(element: any, person: IPersonConfig, index: number, patternList: number[], patternColor: string, cardColor: string, cardSize: { width: number, height: number }, textSize: number, mod: 'default' | 'lucky' | 'sphere' = 'default', type: 'add' | 'change' = 'add') {
+export function useElementStyle(element: any, person: IPersonConfig, index: number, patternList: number[], patternColor: string, cardColor: string, cardSize: { width: number, height: number }, textSize: number, mod: 'default' | 'lucky' | 'sphere' = 'default', type: 'add' | 'change' = 'add', prizeName: string | undefined = undefined) {
   if (patternList.includes(index + 1) && mod === 'default') {
     element.style.backgroundColor = rgba(patternColor, Math.random() * 0.2 + 0.8)
   }
@@ -9,7 +9,7 @@ export function useElementStyle(element: any, person: IPersonConfig, index: numb
     element.style.backgroundColor = rgba(cardColor, Math.random() * 0.5 + 0.25)
   }
   else if (mod === 'lucky') {
-    element.style.backgroundColor = rgba(cardColor, 0.8)
+    element.style.backgroundColor = rgba(cardColor, 0.9)
   }
   element.style.border = `1px solid ${rgba(cardColor, 0.25)}`
   element.style.boxShadow = `0 0 12px ${rgba(cardColor, 0.5)}`
@@ -34,8 +34,8 @@ export function useElementStyle(element: any, person: IPersonConfig, index: numb
     })
   }
   element.children[0].style.fontSize = `${textSize * 0.5}px`
-  if (person.uid) {
-    element.children[0].textContent = person.uid
+  if (person.id) {
+    element.children[0].textContent = `${person.id}`
   }
 
   element.children[1].style.fontSize = `${textSize}px`
@@ -49,12 +49,18 @@ export function useElementStyle(element: any, person: IPersonConfig, index: numb
     element.children[2].innerHTML = `${person.department ? person.department : ''}<br/>${person.identity ? person.identity : ''}`
   }
 
-    element.children[2].style.fontSize = textSize * 0.5 + 'px'
-    if (person.department || person.identity) {
-        element.children[2].innerHTML = `${person.department ? person.department : ''}<br/>${person.identity ? person.identity : ''}`
-    }
-    element.children[3].src = person.avatar
-    return element
+  element.children[2].style.fontSize = textSize * 0.5 + 'px'
+  if (person.department || person.identity) {
+    element.children[2].innerHTML = `${person.department ? person.department : ''}<br/>${person.identity ? person.identity : ''}`
+  }
+  element.children[3].src = person.avatar
+
+  if (mod === 'lucky' && prizeName) {
+    element.children[2].innerHTML = `${prizeName}`
+    element.children[2].style.display = 'block'
+    element.children[2].style.fontSize = textSize * 0.7 + 'px'
+  }
+  return element
 }
 
 /**

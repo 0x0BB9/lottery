@@ -19,6 +19,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toast-notification'
 import PrizeList from './PrizeList.vue'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import { getPrizeNameByIdAndIndex } from '@/store/data'
 
 const { t } = useI18n()
 const toast = useToast()
@@ -130,8 +131,8 @@ function init() {
 
     const detail = document.createElement('div')
     detail.className = 'card-detail'
-    detail.innerHTML = `${tableData.value[i].department}<br/>${tableData.value[i].identity}`
-    if(isShowAvatar.value) detail.style.display = 'none'
+    detail.innerHTML = `${tableData.value[i].department}`
+    if(!isShowAvatar.value) detail.style.display = 'none'
     element.appendChild(detail)
 
     const avatar = document.createElement('img');
@@ -452,7 +453,10 @@ async function stopLottery() {
   rollBall(0, 1)
 
   const windowSize = { width: window.innerWidth, height: window.innerHeight }
+  console.log("luckyTargets", luckyTargets.value)
+  
   luckyTargets.value.forEach((person: IPersonConfig, index: number) => {
+  
     const cardIndex = selectCard(luckyCardList.value, tableData.value.length, person.id)
     luckyCardList.value.push(cardIndex)
     const totalLuckyCount = luckyTargets.value.length
@@ -466,7 +470,9 @@ async function stopLottery() {
       }, 1200)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
-        item.element = useElementStyle(item.element, person, cardIndex, patternList.value, patternColor.value, luckyColor.value, { width: cardSize.value.width * 2, height: cardSize.value.height * 2 }, textSize.value * 2, 'lucky')
+        const prizeName = getPrizeNameByIdAndIndex(currentPrize.value.id, index) || '你自己挑一个吧'
+        console.log('luckyTargets1：', currentPrize.value.id, index, prizeName)
+        item.element = useElementStyle(item.element, person, cardIndex, patternList.value, patternColor.value, luckyColor.value, { width: cardSize.value.width * 2, height: cardSize.value.height * 2 }, textSize.value * 2, 'lucky', 'add', prizeName)
       })
       .start()
       .onComplete(() => {
@@ -487,6 +493,7 @@ async function stopLottery() {
       })
   })
 }
+
 // 继续
 async function continueLottery() {
   if (!canOperate.value) {

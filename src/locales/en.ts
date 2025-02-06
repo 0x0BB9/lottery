@@ -120,7 +120,7 @@ export default {
     notImage: 'Not Image',
     personIsAllDone: 'All Person Is Done',
     personNotEnough: 'Person Is Not Enough',
-    startDraw: 'Now Draw {count} {leftover} people',
+    startDraw: 'Now Draw {count}: {leftover} people',
     completeInformation: 'Please provide complete information',
   },
   placeHolder: {
@@ -142,7 +142,7 @@ export default {
     operation: 'Operation',
     delete: 'Delete',
     removePerson: 'Remove the Person',
-    defaultTitle: '丞百科技',
+    defaultTitle: '丞百科技年会抽奖',
     xlsxName: 'personListTemplate-en.xlsx',
     readmeName: 'readme-en.md',
   },

@@ -120,7 +120,7 @@ export default {
     notImage: '不是图片',
     personIsAllDone: '抽奖抽完了',
     personNotEnough: '抽奖人数不足',
-    startDraw: '现在抽取{count}{leftover}人',
+    startDraw: '现在抽取{count}: {leftover}人',
     completeInformation: '请填写完整信息',
   },
   placeHolder: {
@@ -142,7 +142,7 @@ export default {
     operation: '操作',
     delete: '删除',
     removePerson: '移入未中奖名单',
-    defaultTitle: '丞百科技',
+    defaultTitle: '丞百科技年会抽奖',
     xlsxName: '人口登记表-zhCn.xlsx',
     readmeName: 'readme-zhCn.md',
   },
