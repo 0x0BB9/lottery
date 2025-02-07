@@ -46,6 +46,7 @@ const renderer = ref()
 const controls = ref()
 const objects = ref<any[]>([])
 const temporaryPrizeRef = ref()
+const gameLoadingRef = ref()
 interface TargetType {
   grid: any[]
   helix: any[]
@@ -408,6 +409,13 @@ function getGamePersonList() {
 function showGameDialog() {
   temporaryPrizeRef.value.showModal()
 }
+function showLoadingDialog() {
+  gameLoadingRef.value.showModal()
+}
+function dismissLoadingDialog() {
+  // 关闭加载框
+  gameLoadingRef.value.close()
+}
 // 开始抽奖
 function startLottery() {
   if (!canOperate.value) {
@@ -713,9 +721,14 @@ function cleanup() {
 }
 
 function submitData(value: any) {
-  //TODO 随机选择10个游戏名单
   console.log("游戏名单：" + value)
-  getGamePersonList()
+  showLoadingDialog()
+  // 三秒后关闭
+  setTimeout(() => {
+    dismissLoadingDialog()
+    getGamePersonList()
+  }, 1500)
+  
 }
 
 onMounted(() => {
@@ -822,12 +835,12 @@ onUnmounted(() => {
 
   <dialog id="my_modal_1" ref="temporaryPrizeRef" class="border-none modal">
       <div class="modal-box">
-        <h3 class="text-lg font-bold">
+        <h3 class="text-xl font-bold">
           {{ t('dialog.titleGameList') }}
         </h3>
         <ul>
         <li v-for="target in gameTargets" :key="target.id">
-          <div class="label">
+          <div class="text-xl font-bold pt-4">
             {{ target.name }}
           </div>
           
@@ -836,10 +849,16 @@ onUnmounted(() => {
         <div class="modal-action">
           <form method="dialog" class="flex gap-3">
             <button class="btn btn-sm">
-              {{ t('button.cancel') }}
+              {{ t('button.confirm') }}
             </button>
           </form>
         </div>
+      </div>
+    </dialog>
+
+    <dialog id="my_modal_2" ref="gameLoadingRef" class="border-none modal">
+      <div class="load20">
+	      <div></div><div></div><div></div><div></div><div></div>
       </div>
     </dialog>
 </template>
@@ -1185,5 +1204,176 @@ strong {
         transform: translateZ(0);
         opacity: 1;
     }
+}
+
+.load20 {
+	position: relative;
+}
+.load20>div:nth-child(2) {
+	-webkit-animation: pacman-balls 1s -0.99s infinite linear;
+	animation: pacman-balls 1s -0.99s infinite linear;
+}
+.load20>div:nth-child(3) {
+	-webkit-animation: pacman-balls 1s -0.66s infinite linear;
+	animation: pacman-balls 1s -0.66s infinite linear;
+}
+.load20>div:nth-child(4) {
+	-webkit-animation: pacman-balls 1s -0.33s infinite linear;
+	animation: pacman-balls 1s -0.33s infinite linear;
+}
+.load20>div:nth-child(5) {
+	-webkit-animation: pacman-balls 1s 0s infinite linear;
+	animation: pacman-balls 1s 0s infinite linear;
+}
+.load20>div:first-of-type {
+	width: 0px;
+	height: 0px;
+	border-right: 25px solid transparent;
+	border-top: 25px solid #61E8EA;
+	border-left: 25px solid #61E8EA;
+	border-bottom: 25px solid #61E8EA;
+	border-radius: 25px;
+	-webkit-animation: rotate_pacman_half_up 0.5s 0s infinite;
+	animation: rotate_pacman_half_up 0.5s 0s infinite;
+	position: relative;
+	left: -30px;
+}
+.load20>div:nth-child(2) {
+	width: 0px;
+	height: 0px;
+	border-right: 25px solid transparent;
+	border-top: 25px solid #61E8EA;
+	border-left: 25px solid #61E8EA;
+	border-bottom: 25px solid #61E8EA;
+	border-radius: 25px;
+	-webkit-animation: rotate_pacman_half_down 0.5s 0s infinite;
+	animation: rotate_pacman_half_down 0.5s 0s infinite;
+	margin-top: -50px;
+	position: relative;
+	left: -30px;
+}
+.load20>div:nth-child(3),.load20>div:nth-child(4),.load20>div:nth-child(5),.load20>div:nth-child(6) {
+	background-color: #61E8EA;
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	margin: 2px;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	-webkit-transform: translate(0, -6.25px);
+	transform: translate(0, -6.25px);
+	top: 25px;
+	left: 70px;
+}
+@-webkit-keyframes cube-transition {
+	25% {
+		-webkit-transform: translateX(50px) scale(0.5) rotate(-90deg);
+		transform: translateX(50px) scale(0.5) rotate(-90deg);
+	}
+	50% {
+		-webkit-transform: translate(50px, 50px) rotate(-180deg);
+		transform: translate(50px, 50px) rotate(-180deg);
+	}
+	75% {
+		-webkit-transform: translateY(50px) scale(0.5) rotate(-270deg);
+		transform: translateY(50px) scale(0.5) rotate(-270deg);
+	}
+	100% {
+		-webkit-transform: rotate(-360deg);
+		transform: rotate(-360deg);
+	}
+}
+@keyframes cube-transition {
+	25% {
+		-webkit-transform: translateX(50px) scale(0.5) rotate(-90deg);
+		transform: translateX(50px) scale(0.5) rotate(-90deg);
+	}
+	50% {
+		-webkit-transform: translate(50px, 50px) rotate(-180deg);
+		transform: translate(50px, 50px) rotate(-180deg);
+	}
+	75% {
+		-webkit-transform: translateY(50px) scale(0.5) rotate(-270deg);
+		transform: translateY(50px) scale(0.5) rotate(-270deg);
+	}
+	100% {
+		-webkit-transform: rotate(-360deg);
+		transform: rotate(-360deg);
+	}
+}
+@-webkit-keyframes pacman-balls {
+	75% {
+		opacity: 0.7;
+	}
+	100% {
+		-webkit-transform: translate(-100px, -6.25px);
+		transform: translate(-100px, -6.25px);
+	}
+}
+@keyframes pacman-balls {
+	75% {
+		opacity: 0.7;
+	}
+	100% {
+		-webkit-transform: translate(-100px, -6.25px);
+		transform: translate(-100px, -6.25px);
+	}
+}
+@-webkit-keyframes rotate_pacman_half_down {
+	0% {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+	50% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+}
+@keyframes rotate_pacman_half_down {
+	0% {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+	50% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+}
+@-webkit-keyframes rotate_pacman_half_up {
+	0% {
+		-webkit-transform: rotate(270deg);
+		transform: rotate(270deg);
+	}
+	50% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+	100% {
+		-webkit-transform: rotate(270deg);
+		transform: rotate(270deg);
+	}
+}
+@keyframes rotate_pacman_half_up {
+	0% {
+		-webkit-transform: rotate(270deg);
+		transform: rotate(270deg);
+	}
+	50% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+	100% {
+		-webkit-transform: rotate(270deg);
+		transform: rotate(270deg);
+	}
 }
 </style>
