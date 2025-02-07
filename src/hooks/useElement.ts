@@ -1,7 +1,7 @@
 import type { IPersonConfig } from '@/types/storeType'
 import { rgba } from '@/utils/color'
 
-export function useElementStyle(element: any, person: IPersonConfig, index: number, patternList: number[], patternColor: string, cardColor: string, cardSize: { width: number, height: number }, textSize: number, mod: 'default' | 'lucky' | 'sphere' = 'default', type: 'add' | 'change' = 'add', prizeName: string | undefined = undefined) {
+export function useElementStyle(element: any, person: IPersonConfig, index: number, patternList: number[], patternColor: string, cardColor: string, cardSize: { width: number, height: number }, textSize: number, mod: 'default' | 'lucky' | 'sphere' = 'default', type: 'add' | 'change' = 'add', prizeName: string | undefined = undefined, prizeImage: string | undefined = undefined) {
   if (patternList.includes(index + 1) && mod === 'default') {
     element.style.backgroundColor = rgba(patternColor, Math.random() * 0.2 + 0.8)
   }
@@ -51,12 +51,27 @@ export function useElementStyle(element: any, person: IPersonConfig, index: numb
   if (person.department || person.identity) {
     element.children[2].innerHTML = `${person.department ? person.department : ''}<br/>${person.identity ? person.identity : ''}`
   }
-  element.children[3].src = person.avatar
 
-  if (mod === 'lucky' && prizeName) {
-    element.children[2].innerHTML = `${prizeName}`
-    element.children[2].style.display = 'block'
-    element.children[2].style.fontSize = textSize * 0.7 + 'px'
+  if (mod === 'lucky') {
+    
+
+    if (prizeImage) {
+      element.children[0].style.display = 'none'
+      element.children[1].style.display = 'none'
+      if (person.name) {
+        element.children[2].innerHTML = `${person.name}`
+        element.children[2].style.display = 'block'
+        element.children[2].style.fontSize = textSize + 'px'
+      }
+      
+      element.children[3].src = prizeImage
+      element.children[3].style.display = 'block'
+    } else {
+      element.children[2].innerHTML = `${prizeName}`
+      element.children[2].style.display = 'block'
+      element.children[2].style.fontSize = textSize * 0.7 + 'px'
+    }
+    
   }
   return element
 }

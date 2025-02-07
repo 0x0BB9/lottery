@@ -43,7 +43,8 @@ export interface IPrizeConfig {
 }
 export interface IPrizeItem {
   id: number | string
-  name: string[]
+  name: string[],
+  bg: any[]
 }
 export interface IMusic {
   id: string

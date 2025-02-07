@@ -19,7 +19,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toast-notification'
 import PrizeList from './PrizeList.vue'
 import 'vue-toast-notification/dist/theme-sugar.css'
-import { getPrizeNameByIdAndIndex } from '@/store/data'
+import { getPrizeNameByIdAndIndex, getPrizeImage } from '@/store/data'
 import GameList from './GameList.vue'
 
 const { t } = useI18n()
@@ -496,8 +496,9 @@ async function stopLottery() {
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         const prizeName = getPrizeNameByIdAndIndex(currentPrize.value.id, index) || '你自己挑一个吧'
-        console.log('luckyTargets1：', currentPrize.value.id, index, prizeName)
-        item.element = useElementStyle(item.element, person, cardIndex, patternList.value, patternColor.value, luckyColor.value, { width: cardSize.value.width * 2, height: cardSize.value.height * 2 }, textSize.value * 2, 'lucky', 'add', prizeName)
+        const prizeImage = getPrizeImage(currentPrize.value.id, index)
+        console.log('luckyTargets1：', currentPrize.value.id, index, prizeName, prizeImage)
+        item.element = useElementStyle(item.element, person, cardIndex, patternList.value, patternColor.value, luckyColor.value, { width: cardSize.value.width * 2, height: cardSize.value.height * 2 }, textSize.value * 2, 'lucky', 'add', prizeName, prizeImage)
       })
       .start()
       .onComplete(() => {
