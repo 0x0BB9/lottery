@@ -20,6 +20,7 @@ import { useToast } from 'vue-toast-notification'
 import PrizeList from './PrizeList.vue'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import { getPrizeNameByIdAndIndex } from '@/store/data'
+import GameList from './GameList.vue'
 
 const { t } = useI18n()
 const toast = useToast()
@@ -44,6 +45,7 @@ const camera = ref()
 const renderer = ref()
 const controls = ref()
 const objects = ref<any[]>([])
+const temporaryPrizeRef = ref()
 interface TargetType {
   grid: any[]
   helix: any[]
@@ -63,6 +65,11 @@ const luckyCount = ref(10)
 const personPool = ref<IPersonConfig[]>([])
 
 const intervalTimer = ref<any>(null)
+
+const gameTargets = ref<any[]>([])
+//allPersonList 
+const gamePersonPool = ref<IPersonConfig[]>([])
+
 // 填充数据，填满七行
 function initTableData() {
   if (allPersonList.value.length <= 0) {
@@ -70,6 +77,7 @@ function initTableData() {
   }
   const totalCount = rowCount.value * 7
   const originPersonData = JSON.parse(JSON.stringify(allPersonList.value))
+  gamePersonPool.value = originPersonData
   const originPersonLength = originPersonData.length
   if (originPersonLength < totalCount) {
     const repeatCount = Math.ceil(totalCount / originPersonLength)
@@ -382,6 +390,24 @@ async function enterLottery() {
   currentStatus.value = 1
   rollBall(0.1, 2000)
 }
+function getGamePersonList() {
+  // 重置数据
+  gameTargets.value = []
+  let count = 10
+  for (let i = 0; i < count; i++) {
+    if (gamePersonPool.value.length > 0) {
+      const randomIndex = Math.round(Math.random() * (gamePersonPool.value.length - 1))
+      gameTargets.value.push(gamePersonPool.value[randomIndex])
+      gamePersonPool.value.splice(randomIndex, 1)
+    }
+  }
+  console.log("gameTargets:", gameTargets.value)
+  console.log("gamePersonPool:", gamePersonPool.value)
+  showGameDialog()
+}
+function showGameDialog() {
+  temporaryPrizeRef.value.showModal()
+}
 // 开始抽奖
 function startLottery() {
   if (!canOperate.value) {
@@ -453,7 +479,6 @@ async function stopLottery() {
   rollBall(0, 1)
 
   const windowSize = { width: window.innerWidth, height: window.innerHeight }
-  console.log("luckyTargets", luckyTargets.value)
   
   luckyTargets.value.forEach((person: IPersonConfig, index: number) => {
   
@@ -685,6 +710,13 @@ function cleanup() {
   renderer.value = null
   controls.value = null
 }
+
+function submitData(value: any) {
+  //TODO 随机选择10个游戏名单
+  console.log("游戏名单：" + value)
+  getGamePersonList()
+}
+
 onMounted(() => {
   initTableData()
   init()
@@ -785,6 +817,30 @@ onUnmounted(() => {
   </div>
   <StarsBackground :home-background="homeBackground" />
   <PrizeList class="absolute left-0 top-32" />
+  <GameList class="absolute right-0 top-32" @submit-data="submitData"/>
+
+  <dialog id="my_modal_1" ref="temporaryPrizeRef" class="border-none modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">
+          {{ t('dialog.titleGameList') }}
+        </h3>
+        <ul>
+        <li v-for="target in gameTargets" :key="target.id">
+          <div class="label">
+            {{ target.name }}
+          </div>
+          
+        </li>
+      </ul>
+        <div class="modal-action">
+          <form method="dialog" class="flex gap-3">
+            <button class="btn btn-sm">
+              {{ t('button.cancel') }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 </template>
 
 <style scoped lang="scss">

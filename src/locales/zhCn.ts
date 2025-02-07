@@ -93,6 +93,7 @@ export default {
     dialogSingleDrawLimit: '单次抽取只能抽取10位',
     dialogLatestBrowser: '请使用最新版Chrome或者Edge浏览器',
     tipResetPrize: '进行操作可能会重置数据，请谨慎操作',
+    titleGameList: '游戏参与人员名单',
   },
   tooltip: {
     settingConfiguration: '设置/配置',
@@ -143,6 +144,7 @@ export default {
     delete: '删除',
     removePerson: '移入未中奖名单',
     defaultTitle: '丞百科技年会抽奖',
+    gameTitle: 'Hello, Let\'s play a game',
     xlsxName: '人口登记表-zhCn.xlsx',
     readmeName: 'readme-zhCn.md',
   },

@@ -93,6 +93,7 @@ export default {
     dialogSingleDrawLimit: 'Only 10 characters can be extracted in a single draw',
     dialogLatestBrowser: 'Please use the latest version of Chrome or Edge browser',
     tipResetPrize: 'Performing operations may reset data, please proceed with caution',
+    titleGameList: '游戏参与人员名单',
   },
   tooltip: {
     settingConfiguration: 'Setting/Configuration',
@@ -143,6 +144,7 @@ export default {
     delete: 'Delete',
     removePerson: 'Remove the Person',
     defaultTitle: '丞百科技年会抽奖',
+    ameTitle: 'Hello, Let\'s play a game',
     xlsxName: 'personListTemplate-en.xlsx',
     readmeName: 'readme-en.md',
   },
