@@ -32,6 +32,8 @@ function updatePatternList(event: Event, item: number) {
     data.value.patternList.push(item)
   }
   // emits
+  // 打印年份
+  console.log("updatePatternList", data.value.patternList)
 }
 </script>
 
