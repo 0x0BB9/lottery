@@ -114,6 +114,10 @@ export const configRoutes = {
 }
 const routes = [
   {
+    path: '/',
+    redirect: '/lottery/home',
+  },
+  {
     path: '/lottery',
     component: Layout,
     redirect: '/lottery/home',
