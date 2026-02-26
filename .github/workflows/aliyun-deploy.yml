@@ -39,8 +39,7 @@ jobs:
       - name: Deploy to OSS
         run: |
           ossutil rm oss://${{ secrets.ALIYUN_BUCKET }}/ -rf || true
-          ossutil cp -rf dist/ oss://${{ secrets.ALIYUN_BUCKET }}/
-          ossutil set-acl oss://${{ secrets.ALIYUN_BUCKET }}/ index.html public-read
+          ossutil cp -rf dist/ oss://${{ secrets.ALIYUN_BUCKET }}/ --acl public-read
 
       - name: Refresh CDN Cache (optional)
         run: |
