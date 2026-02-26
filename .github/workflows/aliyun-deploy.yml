@@ -40,6 +40,9 @@ jobs:
         run: |
           ossutil rm oss://${{ secrets.ALIYUN_BUCKET }}/ -rf || true
           ossutil cp -rf dist/ oss://${{ secrets.ALIYUN_BUCKET }}/ --acl public-read
+          ossutil set-meta oss://${{ secrets.ALIYUN_BUCKET }}/index.html Content-Type:text/html -u
+          ossutil set-meta oss://${{ secrets.ALIYUN_BUCKET }}/js/ Content-Type:application/javascript -u -r
+          ossutil set-meta oss://${{ secrets.ALIYUN_BUCKET }}/css/ Content-Type:text/css -u -r
 
       - name: Refresh CDN Cache (optional)
         run: |
