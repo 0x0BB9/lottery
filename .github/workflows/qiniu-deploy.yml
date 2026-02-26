@@ -1,0 +1,51 @@
+name: Deploy to Qiniu
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Install qshell
+        run: |
+          wget https://github.com/qiniu/qshell/releases/download/v2.16.0/qshell-v2.16.0-linux-amd64.tar.gz
+          tar -xzf qshell-v2.16.0-linux-amd64.tar.gz
+          chmod +x qshell
+          sudo mv qshell /usr/local/bin/
+
+      - name: Configure qshell
+        run: |
+          qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }}
+
+      - name: Deploy to Qiniu
+        run: |
+          # 上传文件到七牛云
+          qshell qupload2 \
+            --bucket ${{ secrets.QINIU_BUCKET }} \
+            --src-dir ./dist \
+            --overwrite \
+            --rescan-local
+
+      - name: Refresh CDN
+        run: |
+          qshell cdnrefresh \
+            --dirs \
+            "http://${{ secrets.QINIU_BUCKET }}.qiniudn.com/" || true
