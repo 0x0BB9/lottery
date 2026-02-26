@@ -24,36 +24,33 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Configure AWS CLI for Aliyun OSS
+      - name: Install ossutil
         run: |
-          pip install awscli
-          aws configure set aws_access_key_id ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
-          aws configure set default.region ${{ secrets.ALIYUN_REGION }}
+          wget -q https://gosspublic.alicdn.com/ossutil/1.7.15/ossutil64
+          chmod 755 ossutil64
+          sudo mv ossutil64 /usr/local/bin/ossutil
+          ossutil --version
 
       - name: Deploy to OSS
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
         run: |
-          # 使用 AWS CLI 同步文件，自动识别 MIME 类型
-          aws s3 sync dist/ s3://${{ secrets.ALIYUN_BUCKET }}/ \
-            --endpoint-url https://oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com \
-            --acl public-read \
-            --delete
+          # 先清空 bucket
+          ossutil rm oss://${{ secrets.ALIYUN_BUCKET }}/* -r -f \
+            -i ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
+            -k ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
+            -e oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com || true
+          
+          # 上传所有文件，使用正确的 endpoint
+          ossutil cp dist/ oss://${{ secrets.ALIYUN_BUCKET }}/ -r -f \
+            -i ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
+            -k ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
+            -e oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com \
+            --acl public-read
 
-      - name: Set correct Content-Type for HTML files
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+      - name: Fix Content-Type for HTML
         run: |
-          # 确保 HTML 文件正确显示而非下载
-          aws s3 cp s3://${{ secrets.ALIYUN_BUCKET }}/index.html s3://${{ secrets.ALIYUN_BUCKET }}/index.html \
-            --endpoint-url https://oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com \
-            --acl public-read \
-            --content-type text/html \
-            --metadata-directive REPLACE
-
-      - name: Refresh CDN Cache (optional)
-        run: |
-          echo "CDN refresh skipped - configure manually if needed"
+          # 设置 index.html 的 Content-Type 和 Content-Disposition
+          ossutil set-meta oss://${{ secrets.ALIYUN_BUCKET }}/index.html "Content-Type:text/html#Content-Disposition:inline" \
+            -u \
+            -i ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
+            -k ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
+            -e oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com
