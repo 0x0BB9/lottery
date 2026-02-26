@@ -48,9 +48,12 @@ jobs:
 
       - name: Fix Content-Type for HTML
         run: |
-          # 设置 index.html 的 Content-Type 和 Content-Disposition
-          ossutil set-meta oss://${{ secrets.ALIYUN_BUCKET }}/index.html "Content-Type:text/html#Content-Disposition:inline" \
-            -u \
-            -i ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
-            -k ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
-            -e oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com
+          # 强制覆盖所有 HTML 文件的 headers，移除强制下载
+          for file in $(ossutil ls oss://${{ secrets.ALIYUN_BUCKET }}/ | grep '\.html$' | awk '{print $NF}'); do
+            echo "Fixing: $file"
+            ossutil set-meta "$file" "Content-Type:text/html#Content-Disposition:inline" \
+              -u \
+              -i ${{ secrets.ALIYUN_ACCESS_KEY_ID }} \
+              -k ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} \
+              -e oss-${{ secrets.ALIYUN_REGION }}.aliyuncs.com || true
+          done
