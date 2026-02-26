@@ -74,6 +74,8 @@ function exportData() {
 function resetData() {
   personConfig.resetAlreadyPerson()
   prizeConfig.resetDefault()
+  // 刷新页面
+  window.location.reload()
 }
 
 function deleteAll() {

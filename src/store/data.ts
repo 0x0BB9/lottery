@@ -164,22 +164,22 @@ export const defaultPrizeList = <IPrizeConfig[]>[
   }
 ]
 export const defaultCurrentPrize = <IPrizeConfig>{
-  id: '000',
-  name: '参与奖1',
-  sort: 0,
+  id: '001',
+  name: '幸运奖',
+  sort: 1,
   isAll: false,
   count: 10,
   isUsedCount: 0,
   picture: {
     id: '4',
-    name: '参与奖',
+    name: '幸运奖',
     url: 'https://img1.baidu.com/it/u=2165937980,813753762&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
   },
   separateCount: {
     enable: true,
     countList: [],
   },
-  desc: '参与奖1',
+  desc: '幸运奖',
   isShow: true,
   isUsed: false,
   frequency: 1,
