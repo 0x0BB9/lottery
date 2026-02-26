@@ -33,7 +33,7 @@ jobs:
 
       - name: Configure qshell
         run: |
-          qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }}
+          qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }} github-actions
 
       - name: Deploy to Qiniu
         run: |
